@@ -1,19 +1,22 @@
 name: Metrics
 
 on:
-  schedule: [{ cron: "0 0 * * *" }]  # Run daily
-  workflow_dispatch:
+  schedule: [{ cron: "0 0 * * *" }]  # Runs daily
+  workflow_dispatch:                # Allows manual trigger
 
 jobs:
   github-metrics:
     runs-on: ubuntu-latest
     steps:
-      - name: Generate GitHub metrics (Lite)
+      - name: Generate metrics
         uses: lowlighter/metrics@latest-lite
         with:
           token: ${{ secrets.METRICS_TOKEN }}
 
+          # Core config
           base: ""
+
+          # Language stats
           plugin_languages: yes
           plugin_languages_sections: most-used
           plugin_languages_indepth: yes
